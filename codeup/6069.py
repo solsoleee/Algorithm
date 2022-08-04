@@ -1,0 +1,15 @@
+A="best!!!"
+B="good!!"
+C="run!"
+D="slowly~"
+n=input()
+if(n=="A"):
+    print(A)
+elif(n=="B"):
+    print(B)
+elif(n=="C"):
+    print(C)
+elif(n=="D"):
+    print(D)
+else:
+    print("what?")
