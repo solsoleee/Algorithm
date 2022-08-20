@@ -1,0 +1,19 @@
+N=int(input())
+a=N%5
+b=N//5
+while(True):
+    if(a==0):
+        print(b)
+        break
+    if(a%3==0):
+        print(a//3+b)
+        break
+    if(a//3==0):
+        print(b+a%3)
+        break
+    if(a%3==1 and a//3==1):
+        if(N%3==0):
+            print(N//3)
+            break
+        print("-1")
+        break
