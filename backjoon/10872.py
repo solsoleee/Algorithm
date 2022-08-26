@@ -1,7 +1,7 @@
 N=int(input())
-def f(n):
+def F(n):
     if(n==0):
         return 1
     else:
         return n * f(n-1)
-print(f(N))
+print(F(N))
