@@ -1,6 +1,7 @@
 n=int(input())
-n1=0
-n2=1
-sum=0
 def s(n):
-    s(n)=s(n-1)+s(n-2)
+    if n==0 or n==1:
+        return n
+    else:
+        return s(n-1)+s(n-2)
+print(s(n))
