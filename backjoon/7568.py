@@ -7,5 +7,5 @@ for i in range(n):
     rank=1
     for j in range(n):
         if(data_list[i][0]<data_list[j][0] and data_list[i][1]<data_list[j][1]):
-            rank+=1
+            rank+=2
     print(rank,end=' ')
