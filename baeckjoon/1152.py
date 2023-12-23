@@ -1,2 +1,3 @@
-s=list(input().split())
-print(len(s))
+word = list(input().split())
+
+print(len(word))
