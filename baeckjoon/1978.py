@@ -1,12 +1,13 @@
 N=int(input())
-a=input().split()
-count=0
+number=list(map(int, input().split()))
+total=0
+
 for i in range(N):
-    a[i]=int(a[i])
-    cnt=0
-    for j in range(1,1000):
-        if(a[i]%j==0):
-            cnt+=1
-    if(cnt==2):
-        count+=1
-print(count)
+    prime=[]
+    for j in range(1, number[i]+1):
+        if number[i] % j ==0:
+            prime.append(j)
+    if len(prime) == 2:
+        total += 1
+
+print(total)

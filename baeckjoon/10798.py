@@ -1,11 +1,9 @@
 word=[]
-length=[]
 for i in range(5):
     a= input()
     word.append(a)
-    length.append(len(word))
-print(len(word))
 
-for col in range(5):
-    for row in range(len(col)):
-        print(word[row][col], end="")
+for col in range(15):
+    for row in range(5):
+        if col < len (word[row]):
+            print(word[row][col], end="")
