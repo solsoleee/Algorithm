@@ -1,8 +1,9 @@
 N=int(input())
 cus=[]
 for i in range(N):
-    a=list(input().split())
-    cus.append(a)
+    a,b=input().split()
+    a=int(a)
+    cus.append((a,b))
 
 cus.sort(key=lambda x:(x[0]))
 
