@@ -8,10 +8,10 @@ cycle=[]
 cnt=0
 for i in range(N):
     cnt+=K-1
-    if cnt>len(arr):
+    if cnt>=len(arr):
         cnt=cnt%len(arr)
-        cycle.append(arr.pop(cnt))
+        cycle.append(str(arr.pop(cnt)))
     else:
-        cycle.append(arr.pop(cnt))
+        cycle.append(str(arr.pop(cnt)))
         
-print("<",', '.join(str(cycle)),">",sep="")
+print("<",', '.join(cycle),">",sep="")

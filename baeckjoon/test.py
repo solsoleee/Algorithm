@@ -20,8 +20,6 @@
 grade=int(input())
 
 if (grade%4==0 and grade%100!=0 ) or grade%400==0:
-
     print("1")
-
 else: 
     print("0")

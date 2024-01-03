@@ -1,19 +1,13 @@
 N=int(input())
-a=N%5
-b=N//5
-while(True):
-    if(a==0):
-        print(b)
+
+cnt=0
+while N>0:
+    if N%5==0:
+        cnt=cnt+N//5
         break
-    if(a%3==0):
-        print(a//3+b)
-        break
-    if(a//3==0):
-        print(b+a%3)
-        break
-    if(a%3==1 and a//3==1):
-        if(N%3==0):
-            print(N//3)
-            break
-        print("-1")
-        break
+        N=N%5
+    
+    N-=3
+    cnt+=1
+
+print(cnt)
