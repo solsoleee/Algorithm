@@ -1,12 +1,19 @@
-N=int(input())
+import sys
 
-square=[[0 for _ in range(101)] for _ in range(101)]
+N=int(sys.stdin.readline())
 
-print(square)
+arr=[[0 for j in range(101)] for i in range(101)]
+
+cnt=0
 
 for i in range(N):
-    x,y=list(map(int, input().split()))
-    
-    for row in range(x,x+10):
-        for col in range(y,y+10):
-            square[row][col]=1
+    a,b=map(int, sys.stdin.readline().split())
+
+    for j in range(a, a+10):
+        for k in range(b, b+10):
+            arr[j][k]=1
+
+for i in arr:
+    cnt+=i.count(1)
+
+print(cnt)
