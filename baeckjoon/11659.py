@@ -11,4 +11,3 @@ for i in arr:
     pre_sum.append(temp)
 
 print(pre_sum)
-        
