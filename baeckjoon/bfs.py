@@ -1,11 +1,12 @@
 from collections import deque
 
 def bfs(graph, start, visited):
-    queue = deque[(start)]
+    queue = deque([start])
     visited[start] = True
     while queue:
         v=queue.popleft()
-        print(v,end=' ')
+        # print(v,end=' ')
+        print(graph[v])
         for i in graph[v]:
             print(i)
             if not visited[i]:
