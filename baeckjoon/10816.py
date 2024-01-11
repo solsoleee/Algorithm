@@ -8,8 +8,7 @@ M=int(sys.stdin.readline())
 arr_list=list(map(int, sys.stdin.readline().split()))
 
 c=Counter(arr)
-print(c)
-print(c[1])
+
 for j in arr_list:
     if j in c:
         print(c[j], end=' ')

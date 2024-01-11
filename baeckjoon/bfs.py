@@ -1,32 +1,28 @@
-from collections import deque
+def dfs(x,y):
+    cnt=0
+    if x-1<0 or x>=n or y-1<0 or y>=m:
+        return False
 
-def bfs(graph, start, visited):
-    queue = deque([start])
-    visited[start] = True
-    while queue:
-        v=queue.popleft()
-        # print(v,end=' ')
-        print(graph[v])
-        for i in graph[v]:
-            print(i)
-            if not visited[i]:
-                queue.append(i)
-                visited[i] = True
-                
+    if graph[x][y] ==1:
+        cnt+=1
+        graph[x][y] =0
+        dfs(x-1, y)
+        dfs(x, y-1)
+        dfs(x+1, y)
+        dfs(x, y+1)
+        print("sisi")
+        return True
+n,m=map(int,input().split())
 
-graph=[
-    [],
-    [2,3,8],
-    [1,7],
-    [1,4,5],
-    [3,5],
-    [3,4],
-    [7],
-    [2,6,8],
-    [1,7]
-    ]
+graph=[]
 
-print(graph)
-visited=[False] * 9
+for i in range(n):
+    graph.append(list(map(int,input())))
 
-bfs(graph, 1, visited)
+result=0
+for i in range(n):
+    for j in range(m):
+        
+        if dfs(i,j):
+            result+=1
+
