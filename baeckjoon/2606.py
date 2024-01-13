@@ -9,8 +9,6 @@ for i in range(m):
     graph[a][b]=1
     graph[b][a]=1
 
-print(graph)
-
 def dfs(v):
     visited[v]=1
     for next in range(1,n+1):
