@@ -5,14 +5,13 @@ graph=[]
 for i in range(n):
     graph.append(list(map(int, input())))
 
-print(graph)
-
 def bfs(x,y):
     dx=[-1,1,0,0]
     dy=[0,0,-1,1]
     que=deque((x,y))
     
     while que:
+        x,y=que.popleft()
         for i in range(4):
             nx=x+dx[i]
             ny=y+dy[i]
