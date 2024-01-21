@@ -1,11 +1,22 @@
 n=int(input())
-data_list=[]
+arr=[]
+
 for i in range(n):
-    a,b=map(int,input().split())
-    data_list.append((a,b))
-for i in range(n):
+    x,y=map(int,input().split())
+    arr.append((x,y))
+
+for i in arr:
     rank=1
-    for j in range(n):
-        if(data_list[i][0]<data_list[j][0] and data_list[i][1]<data_list[j][1]):
+    for j in arr:
+        if i[0]<j[0] and i[1]<j[1]:
             rank+=1
-    print(rank,end=',')
+    print(rank, end=' ')
+
+
+
+
+
+
+
+
+
