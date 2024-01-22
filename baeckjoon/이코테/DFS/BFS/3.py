@@ -1,11 +1,7 @@
-# n,m=map(int, input().split())
-# arr=[]
-# visited=[[False]*(m+1) for _ in range(n+1)]
-# print(visited)
-# for i in range(n):
-#     arr.append([int(input())])
+n,m=map(int, input().split())
+graph=[]
 
-# print(arr)
-
-# def dfs():
-#     visted[]
+for i in range(n):
+    graph.append(list(map(int, input())))
+    
+print(graph)
