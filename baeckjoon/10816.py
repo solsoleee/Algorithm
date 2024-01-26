@@ -1,29 +1,13 @@
-import sys
-from collections import Counter
+n=int(input())
+n_list=list(map(int, input().split()))
 
-N=int(sys.stdin.readline())
-arr=list(map(int, sys.stdin.readline().split()))
+d=[0]*(500000)
 
-M=int(sys.stdin.readline())
-arr_list=list(map(int, sys.stdin.readline().split()))
+for i in n_list:
+    d[i]+=1
 
-c=Counter(arr)
+m=int(input())
+m_list=map(int, input().split())
 
-for j in arr_list:
-    if j in c:
-        print(c[j], end=' ')
-    else:
-        print(0, end=' ' )
-
-
-
-# import sys
-
-# d=[0]*500001
-
-# N=int(sys.stdin.readline())
-# arr=list(map(int, sys.stdin.readline().split()))
-
-# for i in arr:
-#     N[i]+=1
-# print(d)
+for j in m_list:
+    print(d[j], end=' ')

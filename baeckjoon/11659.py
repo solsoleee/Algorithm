@@ -1,13 +1,8 @@
 import sys
-input = sys.stdin.readline
 
-N, M = map(int, input().split())
-arr = list(map(int, input().split()))
-pre_sum = [0]
+n,m = map(int, sys.stdin.readline())
 
-temp = 0
-for i in arr:
-    temp += i
-    pre_sum.append(temp)
+arr=list(map(int, sys.stdin.readline().split()))
 
-print(pre_sum)
+d=[0] * 100001
+
