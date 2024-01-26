@@ -16,8 +16,8 @@ def dfs(v):
     print(v, end=' ')
     for i in range(1,n+1):
         if visited[i]==0 and graph[v][i]:
-            dfs(i)
             visited[i]=1
+            dfs(i)
             return True
 
 result=0
