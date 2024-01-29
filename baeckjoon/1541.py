@@ -1,10 +1,14 @@
-n=(input())
+n=input().split('-')
 
+arr=[]
+for i in range(len(n)):
+    arr.append(n[i].split('+'))
+print(arr)
 
-for i in n:
-    print(type(i))
-    # if not (i=='-' or i=='+'):
-    #     print(i)
-    # while not (i=='-' or i=='+'):
-    #     print(i)
-    #     break
+for j in range(len(arr)):
+    if len(arr[j]) > 1:
+        print(arr[j])
+        for i in range(len(arr[j])):
+            
+        
+        
