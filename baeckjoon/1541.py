@@ -8,7 +8,5 @@ print(arr)
 for j in range(len(arr)):
     if len(arr[j]) > 1:
         print(arr[j])
-        for i in range(len(arr[j])):
-            
         
         
