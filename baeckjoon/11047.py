@@ -1,16 +1,16 @@
-N,K=map(int,input().split())
+n,k=map(int, input().split())
 
-arr=[]
+coins=[]
 cnt=0
-for i in range(N):
-    arr.append(int(input()))    
-arr.sort(reverse=True)
+for i in range(n):
+    coins.append(int(input()))
 
-for j in arr:
-    if j<=K: #같은것도 포함
-        cnt+=K//j
-        K=K%j
-    if K==0:
-        break
-    
+coins.sort(reverse=True)
+for coin in coins:
+    if coin <= k:
+        cnt+=k//coin
+        k=k%coin
+        if k==0:
+            break
+
 print(cnt)
