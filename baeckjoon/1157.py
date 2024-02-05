@@ -1,9 +1,12 @@
-cnt=[0]*100000
+s=input().upper()
+word=list(set(s))
 
-s=input()
+cnt=[]
+for i in word:
+    cnt.append(s.count(i))
 
-for i in s:
-    i=i.lower()
-    cnt[ord(i)]+=1
-    
-print(chr(cnt.index(max(cnt))).upper())
+if cnt.count(max(cnt)) >=2:
+    print("?")
+
+else:
+    print(word[cnt.index(max(cnt))])

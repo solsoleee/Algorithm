@@ -1,12 +1,16 @@
 n=int(input())
 cnt=0
-if n>=5:
-    cnt+=n//5
-    n=n%5
-    print(cnt)
-    print(n)
-if n>=2:
-    cnt+=n//2
-    n=n%2
 
+while True:
+    if n%5==0:
+        cnt+=n//5
+        n%=5
+    if n==0:
+        break
+    n-=2
+    cnt+=1
+    if n<0:
+        cnt=-1
+        break
+    
 print(cnt)
