@@ -1,11 +1,10 @@
 s=list(map(int, input()))
 
-result=s[0]
-
+res=s[0]
 for i in range(1, len(s)):
-    if result<=1 or s[i]<=0:
-        result+=s[i]
+    if res==0 or s[i]==0 or s[i]==1:
+        res+=s[i]
     else:
-        result*=s[i]
+        res*=s[i]
 
-print(result)
+print(res)

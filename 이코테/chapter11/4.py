@@ -1,14 +1,15 @@
 n=int(input())
 
-n_list=list(map(int, input().split()))
+arr=list(map(int, input().split()))
 
-n_list.sort()
+arr.sort()
 
 target=1
 
-for i in n_list:
+for i in arr:
     if target < i:
         break
-    target+=i
+    else:
+        target+=i
 
 print(target)
