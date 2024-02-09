@@ -37,4 +37,3 @@ def bfs():
 
 bfs()
 print(graph[target_x-1][target_y-1])
-
