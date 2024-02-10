@@ -1,16 +1,15 @@
-from collections import deque
 n,m=map(int, input().split())
 
 graph=[]
 temp=[[0]*(m) for i in range(n)]
+
 for i in range(n):
     graph.append(list(map(int, input().split())))
 
 dx=[1,0,-1,0]
 dy=[0,1,0,-1]
-result=0
 
-#2를 퍼지게 함
+#2로 퍼뜨림
 def virus(x,y):
     for i in range(4):
         nx=x+dx[i]
@@ -19,40 +18,40 @@ def virus(x,y):
             if temp[nx][ny]==0:
                 temp[nx][ny]=2
                 virus(nx,ny)
-
-#점수를 계산함
-def get_score():
-    score=0
+#0의 개수를 세워줌
+def get_sum():
+    total=0
     for i in range(n):
         for j in range(m):
             if temp[i][j]==0:
-                score+=1
-    return score
+                total+=1
+    return total
 
-#벽을 세우면서 0의 최댓값을 계신
+res=0
+
+#완전 탐색으로 3개 벽을 세우고 0을 하나씩 확인함
 def dfs(count):
-    global result
-    #울타리가 3개 설치된경우
+    global res
     if count==3:
         for i in range(n):
             for j in range(m):
                 temp[i][j]=graph[i][j]
-                
+
         for i in range(n):
             for j in range(m):
                 if temp[i][j]==2:
                     virus(i,j)
-        result=max(result, get_score())
+        
+        res=max(get_sum(), res)
         return
-    #울타리를 세움
+
     for i in range(n):
-        for j in range(m):
+        for j in range(n):
             if graph[i][j]==0:
                 graph[i][j]=1
                 count+=1
                 dfs(count)
                 graph[i][j]=0
                 count-=1
-    
-dfs(0)
-print(result)
+dfs(0)            
+print(res)
