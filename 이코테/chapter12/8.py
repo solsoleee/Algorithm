@@ -1,12 +1,18 @@
-s=list(input())
-arr=[]
-result=0
+s=input()
+
+d=[]
+a=[]
+result=''
 for i in s:
-    if i.isalpha():
-        arr.append(i)
+    if i.isdigit():
+        d.append(int(i))
     else:
-        i=int(i)
-        result+=i
-        
-arr.sort()
-print(*arr,result,sep='')
+        a.append(i)
+
+a.sort()
+for i in a:
+    result+=i
+
+result+=str(sum(d))
+
+print(result)
