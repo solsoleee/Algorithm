@@ -4,7 +4,6 @@ graph=[]
 new_graph=[]
 res=[]
 
-
 for i in range(n):
     graph.append(list(input().split()))
     

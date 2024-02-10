@@ -1,23 +1,36 @@
-# n=int(input())
-# arr=list(map, int(input().split()))
+n=int(input())
+data=list(map(int, input().split()))
 
-# a,b,c,d=map(int, input().split())
+add, sub, mul, div = map(int, input().split())
 
-# max_res=0
+max_value=-1e10
+min_value=1e10
 
-# min_res=arr[0]
+def dfs(i, now):
+    global max_value, min_value, add, sub, mul, div
+    if i==n:
+        max_value=max(max_value, now)
+        min_value=min(min_value, now)
+    else:
+        if add>0:
+            add-=1
+            dfs(i+1, now+data[i])
+            add+=1
+        if sub>0:
+            sub-=1
+            dfs(i+1, now-data[i])
+            sub+=1
+        if mul>0:
+            mul-=1
+            dfs(i+1, now*data[i])
+            mul+=1
+        if div>0:
+            div-=1
+            dfs(i+1, int(now/data[i]))
+            div+=1
 
-# arr.sort()
-# result=arr[0]
+dfs(1, data[0])
+print(max_value)
+print(min_value)
 
-# for i in range(1, len(arr)):
-#     if a:
-#         min_res+=(arr[i])
-#         a-=1
-#     if b:
-#         if min_res<0:
-#             min_res=-((-min_res)//arr[i])
-#     if c:
-        
-# #최댓값은 -, %, + *가 유리하다
-# #최소값은 +, %, - *가 유리하다
+
