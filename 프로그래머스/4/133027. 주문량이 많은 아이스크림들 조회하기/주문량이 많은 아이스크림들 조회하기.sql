@@ -1,11 +1,13 @@
-with Ju as (select FLAVOR, sum(TOTAL_ORDER) as total
-from JULY
-group by FLAVOR)
+-- 코드를 입력하세요
+with j as(
+select FLAVOR, sum(total_order) as total
+from july
+group by flavor
+)
 
-
-select a.FLAVOR
+SELECT a.flavor
 from FIRST_HALF as a
-join Ju as j
-on a.FLAVOR	=j.FLAVOR
-order by (a.TOTAL_ORDER+j.total) desc
+join j as b
+on a.FLAVOR=b.FLAVOR
+order by a.total_order + b.total  desc
 limit 3
