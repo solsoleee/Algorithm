@@ -1,22 +1,21 @@
 from collections import deque
 
 def solution(numbers, target):
+    answer = 0
     
-    def bfs(numsers, target):
-        cnt=0
-        now=[0] #모든 계산 결과
-        for num in numbers: #numbers를 다 돌려줌
-            tmp=[]
-            for parent in now: #모든 계산 결과도 돌려줌
-                tmp.append(parent+num) #현재 계산에서 새로운 값을 더하거나 뺀 것도 추가해줌
-                tmp.append(parent-num)
-            
-            now=tmp #새로운 값으로 계속 update
-        
-        for n in now:
-            if n==target:
-                cnt+=1
-        return cnt
-    answer = bfs(numbers, target)
+    #bfs를 이용해줄거임, 현재 합이랑, 현재 인덱스를 넣어줌
+    que=deque()
+    que.append((0,0))
+    while que:
+        current_sum, index = que.popleft()
+        if index==len(numbers):
+            for a,b in que:
+                if a==target:
+                    answer+=1
+            print(answer)
+            break
+        que.append((current_sum+numbers[index], index+1))
+        que.append((current_sum-numbers[index], index+1))
+
+
     return answer
-        
