@@ -1,6 +1,7 @@
 -- 코드를 입력하세요
-SELECT a.INGREDIENT_TYPE, sum(TOTAL_ORDER) as TOTAL_ORDER
-from icecream_info as a
-join FIRST_HALF as b
+SELECT b.ingredient_type, sum(total_order) as total_order
+from first_half as a
+join icecream_info as b
 on a.flavor=b.flavor
-group by a.INGREDIENT_TYPE
+group by b.ingredient_type
+order by total_order
