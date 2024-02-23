@@ -1,10 +1,12 @@
 from itertools import product
 
 def solution(word):
-    words=[]
+    arr=[]
     for i in range(1, 6):
-        for c in product(['A','E','I','O','U'], repeat=i):
-            words.append(''.join(list(c)))
-    words.sort()
-    answer=(words.index(word)+1)
+        for x in product(["A", "E", "I", "O", "U"], repeat=i):
+            arr.append(''.join(x))
+    arr.sort()
+
+    
+    answer = arr.index(word)+1
     return answer
