@@ -1,11 +1,13 @@
 n,m=map(int, input().split())
 
-result=0
+arr=[]
 
 for i in range(n):
-    data=list(map(int, input().split()))
-    min_data=min(data)
-    result=max(result,min_data)
+    arr.append(list(map(int, input().split())))
+
+result=1
+for i in arr:
+    print(min(i))
+    result=max(result, min(i))
 
 print(result)
-    

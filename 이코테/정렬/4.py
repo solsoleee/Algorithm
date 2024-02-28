@@ -3,10 +3,13 @@ n,k=map(int, input().split())
 a=list(map(int, input().split()))
 b=list(map(int, input().split()))
 
+a.sort()
+b.sort(reverse=True)
+
 for i in range(k):
-    index1=a.index(min(a))
-    index2=b.index(max(b))
-    if min(a) < max(b):
-        a[index1],b[index2] = max(b), min(a)
+    if a[i]<b[i]:
+        a[i],b[i]=b[i],a[i]
+    else:
+        pass
 
 print(sum(a))
