@@ -1,19 +1,17 @@
-import sys
+n=int(input())
 
-N=int(sys.stdin.readline())
+arr=[]
+res=0
+visited=[]
+for i in range(n):
+    x,y=map(int, input().split())
+    arr.append((x,y))
 
-arr=[[0 for j in range(101)] for i in range(101)]
+for x, y in arr:
+    for i in range(x,x+10):
+        for j in range(y,y+10):
+            if not (i,j) in visited:
+                res+=1
+                visited.append((i,j))
 
-cnt=0
-
-for i in range(N):
-    a,b=map(int, sys.stdin.readline().split())
-
-    for j in range(a, a+10):
-        for k in range(b, b+10):
-            arr[j][k]=1
-
-for i in arr:
-    cnt+=i.count(1)
-
-print(cnt)
+print(res)
