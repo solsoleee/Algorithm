@@ -5,6 +5,7 @@ word=input()
 arr=[]
 res=0
 
+
 for a in alp:
     if a in word:
         res+=1
