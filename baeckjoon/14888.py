@@ -1,36 +1,35 @@
+from itertools import permutations
+
 n=int(input())
-data=list(map(int, input().split()))
 
-add, sub, mul, div = map(int, input().split())
+arr=list(map(int, input().split()))
+command=list(map(int, input().split()))
+commands=['+', '-', '*', '%']
+ans=[]
+i=0
+for c in command:
+    if c!=0:
+        for _ in range(c) :
+            ans.append(commands[i])
+    i+=1
 
-max_value=-1e10
-min_value=1e10
+res_sum=[]
 
-def dfs(i, now):
-    global max_value, min_value, add, sub, mul, div
-    if i==n:
-        max_value=max(max_value, now)
-        min_value=min(min_value, now)
-    else:
-        if add>0:
-            add-=1
-            dfs(i+1, now+data[i])
-            add+=1
-        if sub>0:
-            sub-=1
-            dfs(i+1, now-data[i])
-            sub+=1
-        if mul>0:
-            mul-=1
-            dfs(i+1, now*data[i])
-            mul+=1
-        if div>0:
-            div-=1
-            dfs(i+1, int(now/data[i]))
-            div+=1
-
-dfs(1, data[0])
-print(max_value)
-print(min_value)
-
-
+for a in list(permutations(ans, len(ans))):
+    ans_sum=arr[0]
+    for i in range(0, len(ans)):
+        if a[i]=='+':
+            ans_sum+=arr[i+1]
+        elif a[i]=='*':
+            ans_sum*=arr[i+1]
+        elif a[i]=='-':
+            ans_sum-=arr[i+1]
+        else:
+            if ans_sum<0:
+                ans_sum=(-ans_sum)//arr[i+1]
+                ans_sum=(-ans_sum)
+            else:
+                ans_sum//=arr[i+1]
+    res_sum.append(ans_sum)
+print(max(res_sum))
+print(min(res_sum))
