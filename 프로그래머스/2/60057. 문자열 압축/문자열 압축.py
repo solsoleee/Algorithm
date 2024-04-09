@@ -1,18 +1,22 @@
 def solution(s):
-    answer = []
-    cnt=1
-    for i in range(1, len(s)+1): #i개씩 자름
-        result='' #문자열 저장
-        tmp=s[:i] #이전 문자열
-        for j in range(i, len(s)+i, i):
-            if tmp==s[j:i+j]:
+    if len(s)==1:
+        return 1
+    result=[]#문자열 압축 후 담을거
+    for i in range(1, len(s)):
+        cnt=1
+        now=s[:i] #현재 자른 문자열
+        res=''
+        for j in range(i, len(s)+i, i): #i만큼 자름
+            if now==s[j:i+j]:
                 cnt+=1
             else:
-                if cnt!=1: #문자열이 같을 때 (압축해야함)
-                    result=result+str(cnt)+tmp
-                else: #압축 안될 때 그냥 더함
-                    result=result+tmp
-                tmp=s[j:i+j]
+                if cnt<=1: #전이랑 같지도 않다는거
+                    res=res+now
+                else:
+                    res=res+str(cnt)+now
                 cnt=1
-        answer.append(len(result))
-    return min(answer)
+            now=s[j:i+j]
+        result.append(len(res))
+    
+    answer = min(result)
+    return answer
