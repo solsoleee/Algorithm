@@ -1,54 +1,47 @@
-# 그래프를 3배로 키워준다
-# 90도로 돌리는 함수!!를 만든다
-# 새로운 그래프 중앙값에 원래 있는 lock값은 넣는다
-# 돌려가면서 다 1이 되는 수를 찾는다 (1를 찾는 함수 만들기!!)
-# 만족하지 않으면 다시 옮긴다
-
-def rotation(key):
-    n = len(key)
-    m = len(key[0])
-    result = [[0] * m for _ in range(n)]
-    for i in range(n):
-        for j in range(m):
-            result[j][n - i - 1] = key[i][j]
-    return result
-
-def check(new_key):
-    n = len(new_key) // 3
-    for i in range(n, 2 * n):
-        for j in range(n, 2 * n):
-            if new_key[i][j] != 1:
-                return False
-    return True
-
 def solution(key, lock):
-    answer = False
-    n = len(lock)
-    m = len(key)
-    new_lock = [[0] * (n * 3) for _ in range(n * 3)]
-
-    # 새로운 키를 중앙에 넣는다.
-    for i in range(n):
-        for j in range(n):
-            new_lock[n + i][n + j] = lock[i][j]
     
-    # 돌리는 거 4번 반복 90*4=360이니까
-    for r in range(4):
-        key = rotation(key)
-        # 중앙까지 확인
-        for x in range(n * 2):
-            for y in range(n * 2):
-                # 1씩 돌아가면서 더해줌
+    
+    #2차원 배열 회전
+    def rotation(a):
+        n=len(key)
+        m=len(key[0])
+        rotation_key=[[0]*n for _ in range(m)]
+        for i in range(n):
+            for j in range(m):
+                rotation_key[j][n-i-1] = a[i][j]
+        return rotation_key
+    
+    #3배로 확장
+    def new_big_lock():
+        n=len(lock)
+        new_lock=[[0]*(3*n) for j in range(3*n)]
+        for i in range(n, n*2):
+            for j in range(n, n*2):
+                new_lock[i][j]=lock[i-n][j-n]
+        return new_lock
+    
+    #가운데 부분 1이 맞는지 체크 모두 1이면 됨
+    def check(new_lock):
+        for i in range(n, n*2):
+            for j in range(n, n*2):
+                if new_lock[i][j]!=1:
+                    return False
+        return True
+                
+    new_big_lock=new_big_lock() #3배로 확장
+    m=len(key)
+    n=len(lock)
+    for r in range(4): #회전 4번할 때 동안 만족하는지
+        key=rotation(key) #열쇠회전
+        for x in range(n*2):
+            for y in range(n*2):
                 for i in range(m):
                     for j in range(m):
-                        new_lock[x + i][y + j] += key[i][j]
+                        new_big_lock[x+i][y+j]+=key[i][j]
                 
-                if check(new_lock) == True:
-                    answer = True
-                    return answer
-                
-                # 다시 빼줌
+                if check(new_big_lock)==True:
+                    return True
                 for i in range(m):
                     for j in range(m):
-                        new_lock[x + i][y + j] -= key[i][j]        
-    return answer
+                        new_big_lock[x+i][y+j]-=key[i][j]
+    return False
