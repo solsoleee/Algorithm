@@ -1,52 +1,55 @@
-#올바른 괄호 문자열인지 확인
-def balance(p):
-    count=0 #왼쪽 괄호의 개수
-    for i in p:
-        if i=='(':
-            count+=1
-        else: #)일때
-            if count==0:
-                return False
-            count-=1
-    return True
-
-#u와 v로 분리하는 과정
-def get_index(p):
-    count=0
-    for i in range(len(p)):
-        if p[i]=='(':
-            count+=1
-        else:
-            count-=1
-        if count==0:
-            return i
-
 def solution(p):
-    answer = ''
-
-    if p=='':
-        return answer
-
-    index=get_index(p)
     
-    u=p[:index+1]
-    v=p[index+1:]
-    
-    if balance(u):
-        answer=u+solution(v)
-    else:
-        answer+='('
-        answer+=solution(v)
-        answer+=')'
-        u=u[1:-1]
-        u=list(u)
-
-        for i in range(len(u)):
-            if u[i]=='(':
-                u[i]=')'
+    def check1(arr): #올바른 문자열 확인
+        stack=[]
+        for a in arr:
+            if a=='(':
+                stack.append(a)
             else:
-                u[i]='('
-        answer+="".join(u)
-    return answer
-
-solution(')(')
+                if stack:
+                    stack.pop()
+                else:
+                    return False #올바른게
+        return not stack
+    
+    def check2(arr):
+        cnt1=0
+        cnt2=0
+        for a in arr:
+            if a=='(':
+                cnt1+=1
+            else:
+                cnt2+=1
+        return cnt1==cnt2
+    
+    def divide(arr): #u와v로분리해주는 함수
+        u1=''
+        v1=''
+        for i in range(len(arr)):
+            u1+=arr[i]
+            if check2(u1):
+                v1=arr[i+1:]
+                break
+        return u1, v1
+    
+    def process(p):
+        if p=='':
+            return ''
+        answer = ''
+        u, v = divide(p)
+        if check1(u): #u가 올바른 문자열 이라면 1단계부터 실행
+            answer=answer+u+process(v)
+        else:
+            answer=answer+'('
+            answer=answer+process(v)
+            answer=answer+')'
+            u=u[1:len(u)-1]
+            u_reverse=''
+            for i in u:
+                if i=='(':
+                    u_reverse=u_reverse+')'
+                else:
+                    u_reverse=u_reverse+'('
+            answer=answer+u_reverse
+        return answer
+    return process(p)
