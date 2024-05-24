@@ -1,0 +1,11 @@
+a,b,c, n = map(int, input().split())
+
+def solution(a,b,c,n):
+	for i in range(n//a+1):
+		for j in range(n//b+1):
+			for z in range(n//c+1):
+				if a*i + b*j + c*z == n:
+					return 1
+	return 0
+
+print(solution(a,b,c,n))
