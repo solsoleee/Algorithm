@@ -20,14 +20,14 @@ public class Main {
                     flag = true;
                     pre = pre + str.charAt(j);
                 } else {
-                    if (flag && !pre.isEmpty()) {
+                    if (flag) {
                         list.add(new BigInteger(pre));
                         pre = "";
                         flag = false;
                     }
                 }
             }
-            if (flag && !pre.isEmpty()) {
+            if (flag) {
                 list.add(new BigInteger(pre));
             }
         }
