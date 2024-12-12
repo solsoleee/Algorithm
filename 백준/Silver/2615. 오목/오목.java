@@ -8,42 +8,27 @@ import java.util.StringTokenizer;
 public class Main {
     static StringTokenizer tokens;
     static BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-    static int [][] map = new int[19][19]; // 오목판
-    static int [] dx = {0, 1, -1, 1};
-    static int [] dy = {1, 1, 1, 0};
-    static boolean[][][] visited = new boolean[19][19][4];
-    static Queue<int[]> deque = new ArrayDeque<>();
+    static int[][] map = new int[19][19]; // 오목판
+    static int[][] deltas = { {0, 1}, {1, 1}, {-1, 1}, {1, 0}, {0, -1}, {-1, -1}, {1, -1}, {-1, 0} };
+    static boolean[][][] visited = new boolean[19][19][4]; // 4방향만 체크
 
     public static void main(String[] args) throws IOException {
         for (int i = 0; i < 19; i++) {
             tokens = new StringTokenizer(input.readLine());
             for (int j = 0; j < 19; j++) {
                 map[i][j] = Integer.parseInt(tokens.nextToken());
-                if (map[i][j] == 1 || map[i][j] == 2) {
-                    deque.add(new int[] {i, j});
-                }
             }
         }
 
-        while (!deque.isEmpty()) {
-            int[] t = deque.poll();
-            int x = t[0];
-            int y = t[1];
-
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-                if (!check(nx, ny)) continue;
-                if (!visited[x][y][i] && countFive(x, y, i, map[x][y])) {
-                    if(!check(x - dx[i], y - dy[i])) {
-                        System.out.println(map[x][y]);
-                        System.out.print((x + 1) + " " + (y + 1));
-                        return;
-                    }
-                    if(check(x - dx[i], y - dy[i]) && map[x - dx[i]][y - dy[i]] != map[x][y]) {
-                        System.out.println(map[x][y]);
-                        System.out.print((x + 1) + " " + (y + 1));
-                        return;
+        for (int i = 0; i < 19; i++) {
+            for (int j = 0; j < 19; j++) {
+                if (map[i][j] == 1 || map[i][j] == 2) {
+                    for (int d = 0; d < 4; d++) {
+                        if (!visited[i][j][d] && findFive(i, j, d, map[i][j])) {
+                            System.out.println(map[i][j]);
+                            System.out.println((i + 1) + " " + (j + 1));
+                            return;
+                        }
                     }
                 }
             }
@@ -51,18 +36,30 @@ public class Main {
         System.out.println(0); // 승부가 결정되지 않음
     }
 
-    static boolean countFive(int x, int y, int dir, int color) {
-        if (color == 0) return false; // 비었을 때
+    static boolean findFive(int x, int y, int d, int color) {
         int cnt = 1;
-        visited[x][y][dir] = true;
-        while (true) {
-            x += dx[dir];
-            y += dy[dir];
-            if (!check(x, y) || map[x][y] != color) break;
+        int nx = x;
+        int ny = y;
+        
+        while (cnt < 5) {
+            nx += deltas[d][0];
+            ny += deltas[d][1];
+            if (!check(nx, ny) || map[nx][ny] != color) return false;
             cnt++;
-            visited[x][y][dir] = true;
+            visited[nx][ny][d] = true;
         }
-        return cnt == 5;
+
+        // 돌의 개수가 5개를 넘는지 확인 (앞쪽)
+        nx = x - deltas[d][0];
+        ny = y - deltas[d][1];
+        if (check(nx, ny) && map[nx][ny] == color) return false;
+
+        // 돌의 개수가 5개를 넘는지 확인 (뒤쪽)
+        nx = x + 5 * deltas[d][0];
+        ny = y + 5 * deltas[d][1];
+        if (check(nx, ny) && map[nx][ny] == color) return false;
+        
+        return true;
     }
 
     static boolean check(int x, int y) {
