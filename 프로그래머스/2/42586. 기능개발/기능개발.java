@@ -1,37 +1,35 @@
 import java.util.*;
-import java.io.*;
-
 class Solution {
-    public int[] solution(int[] progresses, int[] speeds) {
-        int[] answer = new int[100];
-        for(int i=0; i<100; i++) {
-            answer[i] = 0;
-        }
-        int time=1;
-        int cnt=0;
-        for(int i=0; i<progresses.length; i++) {
-            if(progresses[i] + speeds[i] * time >= 100) {
-                answer[cnt]++;
+    public List solution(int[] progresses, int[] speeds) {
+        int[] answer = {};
+        List<Integer> list = new ArrayList<>();
+        int len = progresses.length;
+        int days[] = new int[len];
+        for(int i=0; i<len; i++) {
+            int p = progresses[i];
+            int day = 0;
+            int s = speeds[i];
+            while(true) {
+                p= p+ s;
+                day++;
+                if(p >= 100) break;
             }
+
+            days[i] = day;
+        }
+        //System.out.println(Arrays.toString(days));
+        int dev = 1;
+        int maxDay = days[0];
+        for(int i=1; i<len; i++) {
+            if(maxDay >= days[i]) dev++;
             else {
-                //System.out.println(cnt);
-                if(i!=0) cnt++; 
-               while(progresses[i]<100) {
-                if(progresses[i] + speeds[i] * time >= 100) {
-                    answer[cnt]++;
-                    
-                    break;
-                }
-                else time ++;
-            } 
+                list.add(dev);
+                maxDay = days[i];
+                dev = 1;
             }
-            //System.out.println(Arrays.toString(answer));
         }
-        int res[] = new int[cnt+1];
-        for(int j=0; j<cnt+1; j++) {
-            //System.out.println(answer[j]);
-            res[j] = answer[j];
-        }
-        return res;
+        list.add(dev);
+        //System.out.println(list);
+        return list;
     }
 }
