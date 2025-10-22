@@ -1,45 +1,37 @@
 import java.util.*;
-
 class Solution {
+    static int graph[][];
+    static int len;
     static boolean visited[];
-    static List<Integer> graph[];
     public int solution(int n, int[][] computers) {
-        visited = new boolean[n+1];
-        graph = new List[n+1];
-        for(int i=0; i<=n; i++) {
-            graph[i] = new ArrayList<>();
-        }
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<n; j++) {
-                if(computers[i][j] == 1) { //연결되어있다면
-                    graph[i+1].add(j+1);
-                }  
-            }
-        }
         int answer = 0;
-        for(int i=1; i<=n; i++) {
-            if(!visited[i]){
-                bfs(i);
+        len = n;
+        graph = new int[n][n];
+        visited = new boolean[n];
+
+        for(int i=0; i<len; i++) {
+            if(!visited[i]) {
+                //System.out.println(i);
+                bfs(i, computers);
                 answer++;
             }
+            
         }
-        //System.out.println(Arrays.toString(graph));
-        
-        //que로 몇개 연결 되었는지..
-
-        
         return answer;
     }
-    static void bfs(int x) {
+    static void bfs(int x, int[][] computers) {
+        
         Queue<Integer> que = new ArrayDeque<>();
         que.offer(x);
         visited[x] = true;
         while(!que.isEmpty()) {
-            int nx = que.poll();
-            for(int next : graph[nx]) {
-                if(!visited[next]) {
-                    que.offer(next);
-                    visited[next] = true;
+            int temp = que.poll();
+            for(int i=0; i<len; i++) {
+                if(computers[temp][i] == 1 && !visited[i]) {
+                    que.offer(i);
+                     //System.out.println(i);
+                    visited[i] = true;
+                   
                 }
             }
         }
