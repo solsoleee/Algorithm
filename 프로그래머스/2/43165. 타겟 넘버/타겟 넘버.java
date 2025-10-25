@@ -1,21 +1,25 @@
 import java.util.*;
-
 class Solution {
-    static boolean visited[];
-    static int n;
-    static int arr[];
+    static int nums[];
+    static int target;
     static int answer;
-    public int solution(int[] numbers, int target) {
+    static int n;
+    public int solution(int[] numbers, int targets) {
+        answer = 0;
+        nums = numbers;
+        target = targets;
         n = numbers.length;
-        dfs(numbers, 0,0,target);
+        dfs(0,0,0);
         return answer;
     }
-    static void dfs(int[] numbers, int cnt, int sum, int target) {
+    static void dfs(int cnt, int sum, int start) {
         if(cnt == n) {
-            if(sum == target) answer++;
-            return;
+            if(sum == target) answer++; //같으면
+            return; 
         }
-        dfs(numbers, cnt+1, sum+numbers[cnt],target);
-        dfs(numbers, cnt+1, sum-numbers[cnt],target);
+        for(int i=start; i<n; i++) {
+            dfs(cnt+1, sum+nums[i], i+1);
+            dfs(cnt+1, sum-nums[i], i+1);
+        }
     }
 }
