@@ -1,28 +1,31 @@
 import java.util.*;
 class Solution {
-    static String str[] = {"A","E","I","O","U"};
-    static List<String> list;
+    static int cnt;
+    static String w;
+    static boolean flag;
+    static int answer;
+    static String arr[] = {"A","E","I","O","U"};
     public int solution(String word) {
-        list = new ArrayList<>();
-        dfs(0,"");
-        int answer = 0;
-        for(int i=0; i<list.size(); i++) {
-            if(list.get(i).equals(word)) {
-                answer = i;
-                break;
-            }
-        }
-    
-        
+        answer = 0;
+        w = word;
+        dfs("");
         return answer;
     }
-    static void dfs(int cnt, String words) {
-        list.add(words);
-        if(cnt == 5) {
-            return;
+    static void dfs(String s) {
+        if(flag) return;
+        if(s.length()>0) {
+            cnt++;
+            System.out.println(s);
+            if(s.equals(w)) {
+                flag = true;
+                answer = cnt;
+                return;
+            }
         }
+        if(s.length()==5) return;
         for(int i=0; i<5; i++) {
-            dfs(cnt+1, words + str[i]);
+            dfs(s+arr[i]);
+            if(flag) return;
         }
     }
 }
