@@ -1,8 +1,10 @@
 -- 코드를 입력하세요
-SELECT a.PRODUCT_ID, a.PRODUCT_NAME, sum(b.AMOUNT*a.PRICE) as TOTAL_SALES
-from FOOD_PRODUCT as a
-join FOOD_ORDER as b
-on a.PRODUCT_ID=b.PRODUCT_ID
-where PRODUCE_DATE like '2022-05%'
-group by product_id
-order by TOTAL_SALES desc, product_id 
+SELECT a.product_id, product_name,  sum(a.PRICE * b.AMOUNT) as TOTAL_SALES from food_product as a
+join food_order as b
+on a.product_id = b.product_id
+where (PRODUCE_DATE >= '2022-05-01' and PRODUCE_DATE <='2022-05-31')
+group by a. PRODUCT_id
+order by (TOTAL_SALES ) desc,product_id asc  # 총매출
+
+
+-- a.product_id, product_name, product_cd, category, a.PRICE * b.AMOUNT
