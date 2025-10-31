@@ -1,11 +1,10 @@
 -- 코드를 입력하세요
-SELECT food_type, rest_id, rest_name, favorites
-from rest_info
-where (food_type, favorites) in (
-select food_type, max(favorites)
-from rest_info
-group by food_type
+SELECT FOOD_TYPE, REST_ID, REST_NAME, FAVORITES from REST_INFO 
+where FAVORITES in (
+SELECT max(FAVORITES) from REST_INFO 
+group by FOOD_TYPE
+order by FOOD_TYPE desc
 )
-order by 1 desc
-
+group by FOOD_TYPE
+order by FOOD_TYPE desc
 
